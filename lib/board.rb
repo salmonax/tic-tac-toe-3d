@@ -5,6 +5,7 @@ class Board
     @x_cells = []
     @o_cells = []
     @player = "X"
+    @cube = build_cells
   end
 
   def winner
@@ -20,6 +21,7 @@ class Board
     if current_plays.include?(play_to_i)
       nil
     else
+      @cube[row-1][column-1][depth-1] = @player
       current_plays << play_to_i  
       play_to_i
     end
@@ -27,6 +29,25 @@ class Board
 
   def switch_player
     @player == 'X' ? @player = 'O' : @player = 'X' 
+  end
+
+  def build_cells
+    Array.new(3) {Array.new(3) {Array.new(3) {'_'}}}
+  end
+ 
+  def to_s
+    board_length = 5
+    square1 = @cube[0]
+    square2 = @cube[1]
+    square3 = @cube[2]
+    "#{print_square(@cube[0],board_length*2)}\n#{print_square(@cube[1],board_length)}\n#{print_square(@cube[2],0)}"
+  end
+
+  def print_square(rows,offset=0)
+    row1 = rows[0]
+    row2 = rows[1]
+    row3 = rows[2]    
+    "#{(' '*offset)+row1.join(' ')}\n#{(' '*offset)+row2.join(' ')}\n#{(' '*offset)+row3.join(' ')}\n"
   end
 
   private 

@@ -23,6 +23,7 @@ end
 until game.over?  
   players.each do
      puts "Player #{board.player}, your turn"
+     puts board
     # puts "Turn #{game.tick+1}: Please pick a row"
     # row = gets.chomp
     # puts "Turn #{game.tick+1}: Please pick a column"
@@ -32,6 +33,6 @@ until game.over?
     board.winner
     game.add_tick
     break if board.winner != nil
-    #board.switch_player 
+    board.switch_player 
   end
 end
